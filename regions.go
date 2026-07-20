@@ -15,7 +15,7 @@ type Region struct {
 }
 
 // Type implements Typer interface
-func (_ RegionCode) Type() string {
+func (RegionCode) Type() string {
 	return TypeRegionCode
 }
 
@@ -84,7 +84,7 @@ func (c RegionCode) Info() *Region {
 }
 
 // Type implements Typer interface
-func (_ *Region) Type() string {
+func (*Region) Type() string {
 	return TypeRegion
 }
 
@@ -94,7 +94,7 @@ func (r Region) Value() (Value, error) {
 }
 
 // Scan implements database/sql.Scanner
-func (r *Region) Scan(src interface{}) error {
+func (r *Region) Scan(src any) error {
 	if r == nil {
 		return fmt.Errorf("countries::Scan: Region scan err: region == nil")
 	}

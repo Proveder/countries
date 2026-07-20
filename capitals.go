@@ -16,7 +16,7 @@ type Capital struct {
 }
 
 // Type implements Typer interface
-func (_ CapitalCode) Type() string {
+func (CapitalCode) Type() string {
 	return TypeCapitalCode
 }
 
@@ -1059,7 +1059,7 @@ func (c CapitalCode) Info() *Capital {
 }
 
 // Type implements Typer interface
-func (_ Capital) Type() string {
+func (Capital) Type() string {
 	return TypeCapital
 }
 
@@ -1069,7 +1069,7 @@ func (c Capital) Value() (Value, error) {
 }
 
 // Scan implements database/sql.Scanner
-func (c *Capital) Scan(src interface{}) error {
+func (c *Capital) Scan(src any) error {
 	if c == nil {
 		return fmt.Errorf("countries::Scan: Capital scan err: capital == nil")
 	}

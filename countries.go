@@ -152,7 +152,7 @@ func (c CountryCode) Emoji3() string {
 }
 
 // Type implements Typer interface.
-func (_ CountryCode) Type() string {
+func (CountryCode) Type() string {
 	return TypeCountryCode
 }
 
@@ -5438,7 +5438,7 @@ func (c CountryCode) Subdivisions() []SubdivisionCode {
 }
 
 // Type implements Typer interface.
-func (_ *Country) Type() string {
+func (*Country) Type() string {
 	return TypeCountry
 }
 
@@ -5448,7 +5448,7 @@ func (country Country) Value() (Value, error) {
 }
 
 // Scan implements database/sql.Scanner
-func (country *Country) Scan(src interface{}) error {
+func (country *Country) Scan(src any) error {
 	if country == nil {
 		return fmt.Errorf("countries::Scan: Country scan err: country == nil")
 	}

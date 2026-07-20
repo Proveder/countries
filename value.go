@@ -16,4 +16,4 @@ package countries
 // in this package. This is used, for example, when a user selects a cursor
 // such as "select cursor(select * from my_table) from dual". If the Rows
 // from the select is closed, the cursor Rows will also be closed.
-type Value interface{}
+type Value any

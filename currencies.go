@@ -1643,7 +1643,7 @@ func (currency Currency) Value() (Value, error) {
 }
 
 // Scan implements database/sql.Scanner
-func (currency *Currency) Scan(src interface{}) error {
+func (currency *Currency) Scan(src any) error {
 	if currency == nil {
 		return fmt.Errorf("countries::Scan: Currency scan err: currency == nil")
 	}

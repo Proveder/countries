@@ -21,7 +21,7 @@ func (c CallCode) String() string {
 }
 
 // Type implements Typer interface
-func (_ CallCode) Type() string {
+func (CallCode) Type() string {
 	return TypeCallCode
 }
 
@@ -834,7 +834,7 @@ func (c CallCode) IsValid() bool {
 }
 
 // Type implements Typer interface
-func (_ *CallCodeInfo) Type() string {
+func (*CallCodeInfo) Type() string {
 	return TypeCallCodeInfo
 }
 
@@ -844,7 +844,7 @@ func (c CallCodeInfo) Value() (Value, error) {
 }
 
 // Scan implements database/sql.Scanner
-func (c *CallCodeInfo) Scan(src interface{}) error {
+func (c *CallCodeInfo) Scan(src any) error {
 	if c == nil {
 		return fmt.Errorf("countries::Scan: CallCodeInfo scan err: callCodeInfo == nil")
 	}

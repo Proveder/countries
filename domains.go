@@ -17,7 +17,7 @@ type Domain struct {
 }
 
 // Type implements Typer interface
-func (_ DomainCode) Type() string {
+func (DomainCode) Type() string {
 	return TypeDomainCode
 }
 
@@ -90,7 +90,7 @@ func (c DomainCode) Info() *Domain {
 }
 
 // Type implements Typer interface
-func (_ Domain) Type() string {
+func (Domain) Type() string {
 	return TypeDomain
 }
 
@@ -100,7 +100,7 @@ func (c Domain) Value() (Value, error) {
 }
 
 // Scan implements database/sql.Scanner
-func (c *Domain) Scan(src interface{}) error {
+func (c *Domain) Scan(src any) error {
 	if c == nil {
 		return fmt.Errorf("countries::Scan: Domain scan err: domain == nil")
 	}

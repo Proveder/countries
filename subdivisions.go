@@ -17,7 +17,7 @@ type Subdivision struct {
 }
 
 // Type implements Typer interface
-func (_ SubdivisionCode) Type() string {
+func (SubdivisionCode) Type() string {
 	return TypeSubdivisionCode
 }
 
@@ -29368,7 +29368,7 @@ func (s SubdivisionCode) SubdivisionType() SubdivisionTypeCode {
 }
 
 // Type implements Typer interface
-func (_ Subdivision) Type() string {
+func (Subdivision) Type() string {
 	return TypeSubdivision
 }
 
@@ -29378,7 +29378,7 @@ func (s Subdivision) Value() (Value, error) {
 }
 
 // Scan implements database/sql.Scanner
-func (s *Subdivision) Scan(src interface{}) error {
+func (s *Subdivision) Scan(src any) error {
 	if s == nil {
 		return fmt.Errorf("countries::Scan: Subdivision scan err: subdivision == nil")
 	}
