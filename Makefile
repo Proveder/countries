@@ -4,8 +4,10 @@ test:
 	go test -cover -race ./...
 
 # Go files tracked by git, expanded lazily by the shell (gopls check needs explicit
-# paths — it does not accept ./...). Falls back to find outside a git checkout.
-GO_FILES = $$(git ls-files '*.go' 2>/dev/null || find . -name '*.go' -not -path './vendor/*')
+# paths — it does not accept ./...). The xargs filter drops tracked-but-deleted
+# files, which git ls-files still reports and gopls errors on. Falls back to
+# find outside a git checkout.
+GO_FILES = $$(git ls-files '*.go' 2>/dev/null | xargs -I{} sh -c '[ -f "{}" ] && echo "{}"' || find . -name '*.go' -not -path './vendor/*')
 
 # gopls' new(expr) modernizer fires on every single-arg helper that returns &param.
 # This repo is a pure data package (generated code tables, no pointer helpers) and on
