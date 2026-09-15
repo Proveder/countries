@@ -535,6 +535,11 @@ func TestDomainsString(t *testing.T) {
 			t.Errorf("Test DomainCode.String() err")
 		}
 	}
+	// Non-country codes above International clamp to the International domain
+	// (999 itself is DomainArpa and never reaches the clamp).
+	if got, want := DomainCode(NonCountryInternationalFreephone).String(), ".international"; got != want {
+		t.Errorf("Test DomainCode.String() clamp err, want %v, got %v", want, got)
+	}
 }
 
 //nolint:gocyclo
