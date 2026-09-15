@@ -871,6 +871,43 @@ func TestCountriesEmoji(t *testing.T) {
 	}
 }
 
+func TestCountriesEmojiExact(t *testing.T) {
+	cases := []struct {
+		code   CountryCode
+		emoji  string
+		emoji3 string
+	}{
+		{RUS, "\U0001F1F7\U0001F1FA", "\U0001F1F7\U0001F1FA\U0001F1F8"}, // R U / R U S
+		{ESP, "\U0001F1EA\U0001F1F8", "\U0001F1EA\U0001F1F8\U0001F1F5"}, // E S / E S P
+		{AUT, "\U0001F1E6\U0001F1F9", "\U0001F1E6\U0001F1FA\U0001F1F9"}, // A T / A U T
+		{ZWE, "\U0001F1FF\U0001F1FC", "\U0001F1FF\U0001F1FC\U0001F1EA"}, // Z W / Z W E
+	}
+	for _, c := range cases {
+		if got := c.code.Emoji(); got != c.emoji {
+			t.Errorf("%v.Emoji() = %q, want %q", c.code, got, c.emoji)
+		}
+		if got := c.code.Emoji3(); got != c.emoji3 {
+			t.Errorf("%v.Emoji3() = %q, want %q", c.code, got, c.emoji3)
+		}
+	}
+}
+
+func TestTextPrepare(t *testing.T) {
+	cases := map[string]string{
+		"Korea (Republic of)": "KOREA",
+		"A(B)":                "A",
+		"(ignored)":           "",
+		"":                    "",
+		"Côte d'Ivoire":       "CÔTEDIVOIRE",
+		"Guinea-Bissau 2":     "GUINEABISSAU",
+	}
+	for in, want := range cases {
+		if got := textPrepare(in); got != want {
+			t.Errorf("textPrepare(%q) = %q, want %q", in, got, want)
+		}
+	}
+}
+
 //nolint:gocyclo
 func TestCountriesFIFA(t *testing.T) {
 	for _, c := range getAllCountries(t) {
