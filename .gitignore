@@ -31,7 +31,6 @@
 *.git
 .git
 .gitignore
-.github
 *todo*
 
 # arch
